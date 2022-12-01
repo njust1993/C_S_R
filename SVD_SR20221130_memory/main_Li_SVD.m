@@ -12,7 +12,7 @@ ide = speye(n);
 [v, si, u] = svds(q, r);     % w : svd-decomposition
 mem = whos;
 max_mem = max(max_mem, sum([mem.bytes]));
-clear q r; 
+clear q r n; 
 % % %
 K_u = kron(u, u);
 mem = whos;
@@ -32,7 +32,7 @@ K_vu =  K_v * K_u;
 lambda = inv(kron(inv_si, inv_si)-c * K_vu);  
 mem = whos;
 max_mem = max(max_mem, sum([mem.bytes]));
-clear K_si  K_vu;
+clear K_si  K_vu  inv_si;
 V_r = K_v * ide(:);
 mem = whos;
 max_mem = max(max_mem, sum([mem.bytes]));

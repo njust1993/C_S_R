@@ -14,23 +14,26 @@ ide_n = speye(n);
 [v, si, u] = svds(q, r);
 mem = whos;
 max_mem = max(max_mem, sum([mem.bytes]));
-clear q ; 
+clear q n; 
 
 % % % Improved Step:
 
 g = v'* u * si; 
+men = whos;
+max_mem = max(max_mem, sum([men.bytes]));
+clear v
 ide_r = eye(r);
-x = ide_r;
+h = ide_r;
 for i = 1:5
-      x = c * g * x *  g' + ide_r; 
+      h = c * g * h *  g' + ide_r; 
 end
 men = whos;
 max_mem = max(max_mem, sum([men.bytes]));
-clear g ide_r v r
-gamma = si * x * si;
+clear g ide_r r
+gamma = si * h * si;
 men = whos;
 max_mem = max(max_mem, sum([men.bytes]));
- clear si
+ clear si h
 
 % % %
 
